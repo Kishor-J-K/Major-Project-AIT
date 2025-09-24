@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Marine Sound Classifier</title>
+    <link rel="stylesheet" href="/static/style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>🌊 Marine Sound Classifier</h1>
+            <p>Upload a WAV audio file of a marine mammal to identify the species.</p>
+        </header>
+        
+        <main>
+            <form action="/upload" method="post" enctype="multipart/form-data">
+                <div class="file-input-wrapper">
+                    <label for="file" class="file-label">
+                        <span>Choose Audio File</span>
+                    </label>
+                    <input type="file" name="file" id="file" required>
+                    <span id="file-name" class="file-name-display">No file selected...</span>
+                </div>
+                <button type="submit" class="submit-btn">Classify</button>
+            </form>
+            
+            <div class="result-container">
+                <p class="result-text">{{ result }}</p>
+            </div>
+        </main>
+    </div>
+
+    <script>
+        // JavaScript to display the selected filename
+        const fileInput = document.getElementById('file');
+        const fileNameDisplay = document.getElementById('file-name');
+
+        fileInput.addEventListener('change', function() {
+            if (this.files.length > 0) {
+                fileNameDisplay.textContent = this.files[0].name;
+            } else {
+                fileNameDisplay.textContent = 'No file selected...';
+            }
+        });
+    </script>
+</body>
+</html>
